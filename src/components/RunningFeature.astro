@@ -5,34 +5,37 @@ import medalha from '../assets/images/karine-corrida-medalha.png';
 ---
 <section class="section running-feature">
   <div class="wrap running-layout">
-    <div class="running-media reveal-mask">
+    <div class="running-photo-wrap reveal">
       <div class="running-photo">
         <Image
           src={corridaProva}
           alt="Dra. Karine Bittencourt correndo na Mons Ultra Trail"
-          widths={[420, 640, 800]}
-          sizes="(min-width: 900px) 50vw, 90vw"
+          widths={[480, 640, 800, 960]}
+          sizes="(min-width: 900px) 56vw, 92vw"
           loading="lazy"
         />
       </div>
-      <div class="running-medal" data-medal>
-        <Image
-          src={medalha}
-          alt="Medalha da Mons Ultra Trail"
-          width={200}
-          loading="lazy"
-        />
+      <div class="running-seal">
+        <span class="running-seal-race">Mons Ultra Trail</span>
+        <span class="running-seal-distance">25 km de trilha</span>
       </div>
     </div>
 
     <div class="running-copy reveal">
-      <span class="editorial-number" data-parallax-slow>25K</span>
-      <span class="running-tag">Mons Ultra Trail</span>
-      <p class="running-quote editorial-quote">Nunca é só corrida.</p>
+      <span class="eyebrow">Mons Ultra Trail · 25 km</span>
+      <h2>25 quilômetros entre preparo, natureza e presença.</h2>
       <p>
-        Preparo, foco, natureza e presença. Uma experiência que reúne muito do que Karine também
-        incentiva em sua prática: movimento, saúde e qualidade de vida.
+        Na Mons Ultra Trail, Karine trocou o jaleco pelo tênis para viver um desafio que exigiu
+        preparo, foco e determinação. Cada subida e cada trecho de trilha reforçaram algo que
+        também faz parte do seu trabalho: cuidar do corpo sem separar saúde, movimento e vida real.
       </p>
+      <p class="running-highlight editorial-quote">
+        Cada um sabe por que corre — mas nunca é só corrida.
+      </p>
+    </div>
+
+    <div class="running-medal" data-medal>
+      <Image src={medalha} alt="Medalha da Mons Ultra Trail" width={130} loading="lazy" />
     </div>
   </div>
 </section>

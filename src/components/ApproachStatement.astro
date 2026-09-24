@@ -1,12 +1,21 @@
 ---
-const axes = [
-  { n: '01', label: 'Entender o momento', text: 'Rotina, histórico e objetivos antes de qualquer plano.' },
-  { n: '02', label: 'Cuidar do movimento', text: 'Treino, recuperação e sinais do corpo na mesma conversa.' },
-  { n: '03', label: 'Construir continuidade', text: 'Ajustes ao longo do tempo, não uma resposta única.' },
+const ideas = [
+  {
+    label: 'Compreender o momento',
+    text: 'Histórico, rotina e objetivos ajudam a dar contexto ao que o corpo apresenta.',
+  },
+  {
+    label: 'Observar o movimento',
+    text: 'Treino, recuperação, desconfortos e respostas do organismo precisam ser considerados em conjunto.',
+  },
+  {
+    label: 'Tornar o cuidado possível',
+    text: 'A orientação precisa conversar com a vida real para ter continuidade.',
+  },
 ];
 ---
 <section class="section approach" id="para-voce">
-  <div class="wrap">
+  <div class="wrap approach-layout">
     <div class="approach-head reveal">
       <h2>Saúde não cabe em uma única medida.</h2>
       <p class="lede">
@@ -14,12 +23,11 @@ const axes = [
       </p>
     </div>
 
-    <div class="approach-axes">
-      {axes.map((axis, i) => (
-        <div class="approach-axis reveal" style={`--reveal-delay: ${0.1 + i * 0.08}s`}>
-          <span class="editorial-number">{axis.n}</span>
-          <strong>{axis.label}</strong>
-          <span>{axis.text}</span>
+    <div class="approach-ideas">
+      {ideas.map((idea, i) => (
+        <div class="approach-idea reveal" style={`--reveal-delay: ${0.1 + i * 0.08}s`}>
+          <strong>{idea.label}</strong>
+          <span>{idea.text}</span>
         </div>
       ))}
     </div>

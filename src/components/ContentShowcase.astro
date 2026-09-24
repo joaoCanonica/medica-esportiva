@@ -1,5 +1,5 @@
 ---
-import { Image } from 'astro:assets';
+import { Image, getImage } from 'astro:assets';
 import { educationalContent, instagramTeaser, links } from '../data/site';
 import InstagramIcon from './icons/InstagramIcon.astro';
 import PlayIcon from './icons/PlayIcon.astro';
@@ -13,8 +13,15 @@ const posters: Record<string, ImageMetadata> = {
   'corrida-preparo-prevencao': posterCorrida,
 };
 
-const featured = educationalContent.find((item) => item.featured)!;
-const secondary = educationalContent.filter((item) => !item.featured);
+// Resolve uma URL única (não responsiva) de cada poster para uso em
+// video.poster via JS — o mesmo arquivo já otimizado, sem gerar duplicata.
+const posterUrls: Record<string, string> = {};
+for (const [slug, src] of Object.entries(posters)) {
+  const resolved = await getImage({ src, width: 640 });
+  posterUrls[slug] = resolved.src;
+}
+
+const ordered = [...educationalContent].sort((a, b) => Number(b.featured) - Number(a.featured));
 ---
 <section class="section showcase" id="conteudos">
   <div class="wrap">
@@ -24,49 +31,28 @@ const secondary = educationalContent.filter((item) => !item.featured);
     </div>
 
     <div class="showcase-grid reveal" style="--reveal-delay: 0.1s">
-      <button
-        type="button"
-        class="showcase-card showcase-card--main watch-trigger"
-        data-video-src={featured.videoSrc}
-        data-video-title={featured.title}
-      >
-        <Image
-          src={posters[featured.slug]}
-          alt={`Imagem de capa do vídeo: ${featured.title}`}
-          widths={[420, 640]}
-          sizes="(min-width: 860px) 55vw, 92vw"
-          loading="lazy"
-        />
-        {featured.duration && <span class="showcase-duration">{featured.duration}</span>}
-        <span class="showcase-card-body">
-          <h3>{featured.title}</h3>
-          <span class="showcase-play" aria-hidden="true"><PlayIcon /></span>
-        </span>
-      </button>
-
-      <div class="showcase-secondary">
-        {secondary.map((item) => (
-          <button
-            type="button"
-            class="showcase-card showcase-card--secondary watch-trigger"
-            data-video-src={item.videoSrc}
-            data-video-title={item.title}
-          >
-            <Image
-              src={posters[item.slug]}
-              alt={`Imagem de capa do vídeo: ${item.title}`}
-              widths={[320, 480]}
-              sizes="(min-width: 860px) 38vw, 92vw"
-              loading="lazy"
-            />
-            {item.duration && <span class="showcase-duration">{item.duration}</span>}
-            <span class="showcase-card-body">
-              <h3>{item.title}</h3>
-              <span class="showcase-play" aria-hidden="true"><PlayIcon /></span>
-            </span>
-          </button>
-        ))}
-      </div>
+      {ordered.map((item) => (
+        <button
+          type="button"
+          class:list={['showcase-card watch-trigger', { 'showcase-card--main': item.featured }]}
+          data-video-src={item.videoSrc}
+          data-video-title={item.title}
+          data-video-poster={posterUrls[item.slug]}
+        >
+          <Image
+            src={posters[item.slug]}
+            alt={`Imagem de capa do vídeo: ${item.title}`}
+            widths={[320, 480, 640]}
+            sizes={item.featured ? '(min-width: 860px) 32vw, 68vw' : '(min-width: 860px) 24vw, 68vw'}
+            loading="lazy"
+          />
+          {item.duration && <span class="showcase-duration">{item.duration}</span>}
+          <span class="showcase-card-body">
+            <h3>{item.title}</h3>
+            <span class="showcase-play" aria-hidden="true"><PlayIcon /></span>
+          </span>
+        </button>
+      ))}
     </div>
 
     <p class="showcase-footer reveal" style="--reveal-delay: 0.15s">
@@ -90,6 +76,10 @@ const secondary = educationalContent.filter((item) => !item.featured);
     </div>
     <div class="video-dialog-body">
       <video id="video-dialog-player" class="video-dialog-player" controls playsinline preload="none"></video>
+      <div class="video-dialog-loading" id="video-dialog-loading" hidden aria-hidden="true">
+        <span class="video-dialog-spinner"></span>
+        <span>Carregando vídeo</span>
+      </div>
       <p class="video-dialog-error" id="video-dialog-error" hidden>
         <span>Não foi possível carregar o vídeo agora.</span>
         <span><a href={links.instagram} target="_blank" rel="noopener noreferrer">Assista no Instagram</a>.</span>
