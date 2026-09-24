@@ -1,0 +1,28 @@
+---
+import { clinic, links } from '../data/site';
+import PinIcon from './icons/PinIcon.astro';
+---
+<section class="section">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Localização</span>
+      <h2>Atendimento em Lages, Santa Catarina.</h2>
+    </div>
+
+    <div class="location-box reveal" style="--reveal-delay: 0.1s">
+      <div>
+        <p class="location-address">
+          <span>{clinic.name}</span>
+          <span>{clinic.street} - {clinic.neighborhood}</span>
+          <span>{clinic.city} - {clinic.state}</span>
+        </p>
+        <p class="location-meta">CEP {clinic.postalCode}</p>
+      </div>
+
+      <a class="btn btn--primary" href={links.googleMaps} target="_blank" rel="noopener noreferrer">
+        <PinIcon />
+        Abrir rota no Google Maps
+      </a>
+    </div>
+  </div>
+</section>

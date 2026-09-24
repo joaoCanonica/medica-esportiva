@@ -1,0 +1,46 @@
+---
+import { Image } from 'astro:assets';
+import palestra from '../assets/images/karine-palestra.png';
+import seminario from '../assets/images/karine-seminario.png';
+---
+<section class="section">
+  <div class="wrap editorial-split">
+    <div class="reveal">
+      <span class="eyebrow">Conhecimento compartilhado</span>
+      <h2>Conhecimento que também acontece fora do consultório.</h2>
+      <div class="text-block">
+        <p>
+          Palestras, conversas e ações de educação em saúde fazem parte da presença profissional
+          da Dra. Karine, aproximando informação médica da rotina de diferentes públicos.
+        </p>
+        <p>
+          Entre essas participações está uma conversa na Potência Empreendedora, sobre saúde
+          física e mental, autocuidado e os desafios da rotina feminina.
+        </p>
+      </div>
+    </div>
+
+    <div class="sharing-media reveal" style="--reveal-delay: 0.1s">
+      <figure>
+        <Image
+          src={palestra}
+          alt="Registro da Dra. Karine Bittencourt em uma palestra"
+          widths={[220, 320]}
+          sizes="(min-width: 900px) 220px, 45vw"
+          loading="lazy"
+        />
+        <figcaption>Palestra sobre saúde e movimento</figcaption>
+      </figure>
+      <figure>
+        <Image
+          src={seminario}
+          alt="Registro da Dra. Karine Bittencourt em uma ação de educação em saúde"
+          widths={[220, 320]}
+          sizes="(min-width: 900px) 220px, 45vw"
+          loading="lazy"
+        />
+        <figcaption>Ação de educação em saúde</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>

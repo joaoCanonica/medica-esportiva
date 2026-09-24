@@ -1,0 +1,68 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import MobileCTA from '../components/MobileCTA.astro';
+import { doctor, links } from '../data/site';
+---
+<BaseLayout
+  title={`Política de Privacidade | ${doctor.name}`}
+  description="Política de privacidade do site da Dra. Karine Bittencourt: caráter informativo, ausência de formulários próprios e links para serviços externos."
+  path="/politica-de-privacidade"
+>
+  <Header />
+  <main id="main">
+    <section class="section">
+      <div class="wrap" style="max-width: 46rem;">
+        <span class="eyebrow">Informações legais</span>
+        <h1>Política de Privacidade</h1>
+
+        <div class="text-block" style="margin-top: 2rem; max-width: none;">
+          <p>
+            Este site tem caráter exclusivamente informativo. Ele apresenta o trabalho da
+            {doctor.name} e não substitui consulta, diagnóstico ou tratamento médico.
+          </p>
+
+          <p>
+            No momento, este site não possui formulário próprio de contato, cadastro ou coleta
+            de dados. Não solicitamos nem armazenamos informações pessoais através dele.
+          </p>
+
+          <p>
+            Os botões e links disponíveis ao longo do site direcionam para serviços externos,
+            de terceiros, sendo eles:
+          </p>
+
+          <ul style="list-style: disc; padding-left: 1.5rem; margin-top: -0.5rem;">
+            <li>
+              <a class="text-link" href={links.whatsapp} target="_blank" rel="noopener noreferrer">WhatsApp</a>,
+              para envio de mensagens diretamente à Dra. Karine Bittencourt;
+            </li>
+            <li>
+              <a class="text-link" href={links.instagram} target="_blank" rel="noopener noreferrer">Instagram</a>,
+              para conhecer o trabalho e a presença profissional da Dra. Karine Bittencourt;
+            </li>
+            <li>
+              <a class="text-link" href={links.googleMaps} target="_blank" rel="noopener noreferrer">Google Maps</a>,
+              para visualizar a localização do atendimento.
+            </li>
+          </ul>
+
+          <p>
+            Cada um desses serviços possui sua própria política de privacidade e seus próprios
+            termos de uso, definidos por suas respectivas empresas. Recomendamos a leitura dessas
+            políticas antes de utilizá-los.
+          </p>
+
+          <p>
+            Caso este site venha a incluir formulários, ferramentas de análise de dados ou
+            qualquer outra forma de coleta de informações no futuro, esta política será
+            atualizada para refletir essas mudanças.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+  <MobileCTA />
+</BaseLayout>

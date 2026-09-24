@@ -1,0 +1,31 @@
+---
+import { doctor, clinic, links } from '../data/site';
+const year = new Date().getFullYear();
+---
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div>
+        <p class="footer-brand">{doctor.name}</p>
+        <p>{doctor.positioning}</p>
+        <p class="footer-reg">{doctor.registration}</p>
+        <p class="footer-reg">{clinic.city}/{clinic.state}</p>
+      </div>
+
+      <nav class="footer-links" aria-label="Links úteis">
+        <a href={links.whatsapp} target="_blank" rel="noopener noreferrer">WhatsApp</a>
+        <a href={links.instagram} target="_blank" rel="noopener noreferrer">Instagram</a>
+        <a href={links.googleMaps} target="_blank" rel="noopener noreferrer">Google Maps</a>
+        <a href="/politica-de-privacidade">Política de Privacidade</a>
+      </nav>
+    </div>
+
+    <div class="footer-bottom">
+      <p class="footer-disclaimer">
+        Este site tem caráter informativo e não substitui consulta, diagnóstico ou tratamento
+        médico.
+      </p>
+      <p>&copy; {year} {doctor.name}</p>
+    </div>
+  </div>
+</footer>

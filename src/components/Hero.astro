@@ -1,0 +1,58 @@
+---
+import { Image } from 'astro:assets';
+import portrait from '../assets/images/karine-retrato-jaleco.png';
+import { doctor, links } from '../data/site';
+import WhatsAppIcon from './icons/WhatsAppIcon.astro';
+import InstagramIcon from './icons/InstagramIcon.astro';
+---
+<section class="hero" id="inicio">
+  <div class="wrap">
+    <div class="hero-copy">
+      <span class="hero-kicker">Medicina de Família e Esportiva</span>
+      <h1>Medicina para uma vida em movimento.</h1>
+      <p class="lede">
+        Acompanhamento médico para quem deseja começar, continuar ou evoluir no esporte
+        com mais saúde, segurança e consciência.
+      </p>
+
+      <div class="cta-group">
+        <a class="btn btn--primary" href={links.whatsapp} target="_blank" rel="noopener noreferrer">
+          <WhatsAppIcon />
+          Agendar consulta
+        </a>
+        <a class="btn btn--ghost" href={links.instagram} target="_blank" rel="noopener noreferrer">
+          <InstagramIcon />
+          Conhecer o trabalho no Instagram
+        </a>
+      </div>
+
+      <div class="hero-identity">
+        <strong>{doctor.name}</strong>
+        <span>{doctor.practiceAreas}</span>
+        <span>{doctor.registration}</span>
+        <span>Lages, {doctor.stateFull}</span>
+      </div>
+    </div>
+
+    <div class="hero-media">
+      <div class="hero-media-frame">
+        <Image
+          src={portrait}
+          alt="Retrato da Dra. Karine Bittencourt de jaleco"
+          widths={[280, 400, 560]}
+          sizes="(min-width: 860px) 360px, 68vw"
+          loading="eager"
+          fetchpriority="high"
+        />
+      </div>
+      <p class="hero-media-caption">Medicina e estilo de vida, com presença em Lages/SC.</p>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="scroll-hint" aria-hidden="true">
+      <span class="scroll-hint-line"></span>
+      <span>Role para conhecer a abordagem</span>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,84 @@
+---
+import '@fontsource-variable/fraunces/wght.css';
+import '@fontsource-variable/inter/wght.css';
+import '../styles/global.css';
+import { doctor, clinic, links, seo } from '../data/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+  path?: string;
+}
+
+const {
+  title = seo.title,
+  description = seo.description,
+  path = '/',
+} = Astro.props;
+
+const canonicalURL = new URL(path, Astro.site);
+const ogImageURL = new URL('/og-image.png', Astro.site);
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'Physician',
+  name: doctor.name,
+  medicalSpecialty: doctor.practiceAreas,
+  description: seo.description,
+  telephone: '+55 49 99924-7102',
+  url: canonicalURL.toString(),
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: `${clinic.street} - ${clinic.neighborhood}`,
+    addressLocality: clinic.city,
+    addressRegion: clinic.state,
+    postalCode: clinic.postalCode,
+    addressCountry: 'BR',
+  },
+  areaServed: {
+    '@type': 'City',
+    name: `${clinic.city}, ${clinic.state}`,
+  },
+  identifier: [
+    { '@type': 'PropertyValue', name: 'CRM/SC', value: '16812' },
+    { '@type': 'PropertyValue', name: 'RQE', value: '11326' },
+  ],
+  sameAs: [links.instagram],
+};
+---
+
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={canonicalURL} />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content={doctor.name} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:image" content={ogImageURL} />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:site_name" content={doctor.name} />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageURL} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+  </head>
+  <body>
+    <a href="#main" class="skip-link">Pular para o conteúdo</a>
+    <slot />
+  </body>
+</html>

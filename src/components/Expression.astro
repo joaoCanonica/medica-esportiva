@@ -1,0 +1,33 @@
+---
+import { Image } from 'astro:assets';
+import danca from '../assets/images/karine-danca.png';
+---
+<section class="section">
+  <div class="wrap editorial-split editorial-split--reverse">
+    <div class="editorial-media reveal">
+      <Image
+        src={danca}
+        alt="Dra. Karine Bittencourt em momento de dança, expressão e movimento"
+        widths={[420, 640, 800]}
+        sizes="(min-width: 900px) 50vw, 90vw"
+        loading="lazy"
+      />
+    </div>
+
+    <div class="reveal" style="--reveal-delay: 0.1s">
+      <span class="eyebrow">Expressão</span>
+      <h2>Movimento também é expressão.</h2>
+      <div class="text-block">
+        <p>
+          Além da medicina e dos próprios treinos, Karine encontra na corrida, na força e na
+          dança diferentes maneiras de se manter presente e ativa.
+        </p>
+      </div>
+
+      <p class="human-note">
+        Médica, praticante de atividade física e mãe de dois filhos, ela também conhece os
+        desafios de conciliar trabalho, família, autocuidado e uma rotina possível.
+      </p>
+    </div>
+  </div>
+</section>

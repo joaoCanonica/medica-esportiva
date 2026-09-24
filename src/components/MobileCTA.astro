@@ -1,0 +1,15 @@
+---
+import { links } from '../data/site';
+import WhatsAppIcon from './icons/WhatsAppIcon.astro';
+import InstagramIcon from './icons/InstagramIcon.astro';
+---
+<div class="mobile-cta-bar" role="region" aria-label="Ações rápidas">
+  <a class="btn btn--primary" href={links.whatsapp} target="_blank" rel="noopener noreferrer">
+    <WhatsAppIcon />
+    Agendar
+  </a>
+  <a class="btn btn--ghost" href={links.instagram} target="_blank" rel="noopener noreferrer">
+    <InstagramIcon />
+    Instagram
+  </a>
+</div>
