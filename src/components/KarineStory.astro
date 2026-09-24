@@ -1,10 +1,12 @@
 ---
-import { Image } from 'astro:assets';
+import { Image, getImage } from 'astro:assets';
 import { storySteps } from '../data/site';
+import PlayIcon from './icons/PlayIcon.astro';
 import medica from '../assets/story-frames/karine-consulta.png';
 import atleta from '../assets/images/karine-corrida-prova.png';
 import expressao from '../assets/images/karine-danca.png';
 import conhecimento from '../assets/story-frames/karine-palestra-frame.jpg';
+import posterCheckup from '../assets/video-posters/checkup-cardiologico.png';
 
 const images: Record<string, ImageMetadata> = { medica, atleta, expressao, conhecimento };
 const altText: Record<string, string> = {
@@ -13,6 +15,14 @@ const altText: Record<string, string> = {
   expressao: 'Dra. Karine Bittencourt dançando',
   conhecimento: 'Dra. Karine Bittencourt em uma palestra sobre saúde',
 };
+
+// A cena "médica" ganha um vídeo (já publicado, mesmo usado em Conteúdos)
+// em vez de imagem estática, sem adicionar nenhuma mídia nova ao site.
+const medicaVideo = {
+  src: '/videos/checkup-cardiologico.mp4',
+  title: 'Antes da performance, vem a segurança',
+};
+const medicaPoster = await getImage({ src: posterCheckup, width: 640 });
 ---
 <section class="section story" id="trajetoria">
   <div class="wrap">
@@ -25,15 +35,31 @@ const altText: Record<string, string> = {
       <div class="story-visual">
         <div class="story-visual-frame">
           {storySteps.map((step) => (
-            <Image
-              src={images[step.image]}
-              alt={altText[step.image]}
-              widths={[420, 640]}
-              sizes="(min-width: 960px) 480px, 88vw"
-              loading="lazy"
-              data-scene={step.image}
-              data-scene-active={step.image === 'medica' ? 'true' : 'false'}
-            />
+            step.image === 'medica' ? (
+              <button
+                type="button"
+                class="watch-trigger media-video-trigger story-scene-trigger"
+                data-scene={step.image}
+                data-scene-active={step.image === 'medica' ? 'true' : 'false'}
+                data-video-src={medicaVideo.src}
+                data-video-title={medicaVideo.title}
+                data-video-poster={medicaPoster.src}
+                aria-label={`Assistir vídeo: ${medicaVideo.title}`}
+              >
+                <Image src={images[step.image]} alt={altText[step.image]} widths={[420, 640]} sizes="(min-width: 960px) 480px, 88vw" loading="lazy" data-scene={step.image} />
+                <span class="media-play-badge" aria-hidden="true"><PlayIcon /></span>
+              </button>
+            ) : (
+              <Image
+                src={images[step.image]}
+                alt={altText[step.image]}
+                widths={[420, 640]}
+                sizes="(min-width: 960px) 480px, 88vw"
+                loading="lazy"
+                data-scene={step.image}
+                data-scene-active={step.image === 'medica' ? 'true' : 'false'}
+              />
+            )
           ))}
         </div>
       </div>
@@ -42,14 +68,28 @@ const altText: Record<string, string> = {
         {storySteps.map((step) => (
           <div class="story-step" data-story-step={step.image}>
             <div class="story-step-media">
-              <Image
-                src={images[step.image]}
-                alt={altText[step.image]}
-                widths={[420, 640]}
-                sizes="88vw"
-                loading="lazy"
-                data-scene={step.image}
-              />
+              {step.image === 'medica' ? (
+                <button
+                  type="button"
+                  class="watch-trigger media-video-trigger"
+                  data-video-src={medicaVideo.src}
+                  data-video-title={medicaVideo.title}
+                  data-video-poster={medicaPoster.src}
+                  aria-label={`Assistir vídeo: ${medicaVideo.title}`}
+                >
+                  <Image src={images[step.image]} alt={altText[step.image]} widths={[420, 640]} sizes="88vw" loading="lazy" data-scene={step.image} />
+                  <span class="media-play-badge" aria-hidden="true"><PlayIcon /></span>
+                </button>
+              ) : (
+                <Image
+                  src={images[step.image]}
+                  alt={altText[step.image]}
+                  widths={[420, 640]}
+                  sizes="88vw"
+                  loading="lazy"
+                  data-scene={step.image}
+                />
+              )}
             </div>
             <span class="story-step-kicker">{step.kicker}</span>
             <h3>{step.title}</h3>

@@ -1,16 +1,16 @@
 ---
 import { Image } from 'astro:assets';
 import { journeys } from '../data/site';
-import consulta from '../assets/story-frames/karine-consulta-comecar.png';
+import consulta from '../assets/journeys/comecar-treino.png';
 import medalha from '../assets/images/karine-corrida-medalha.png';
-import dor from '../assets/video-posters/dor-treino-lesao.png';
+import dor from '../assets/journeys/sem-dor-diferenciar.png';
 import corrida from '../assets/images/karine-corrida-prova.png';
 
 const images: Record<string, ImageMetadata> = { consulta, medalha, dor, corrida };
 const altText: Record<string, string> = {
-  consulta: 'Dra. Karine Bittencourt em atendimento',
+  consulta: 'Dra. Karine Bittencourt treinando: sua velhice saudável começa aqui',
   medalha: 'Medalha de participação em prova de corrida',
-  dor: 'Dra. Karine Bittencourt falando sobre dor de treino',
+  dor: 'Como diferenciar dor de treino e dor de lesão',
   corrida: 'Dra. Karine Bittencourt correndo em uma prova',
 };
 ---
@@ -53,13 +53,7 @@ const altText: Record<string, string> = {
               <p>{j.text}</p>
             </div>
             <div class="journey-panel-media">
-              <Image
-                src={images[j.image]}
-                alt={altText[j.image]}
-                widths={[360, 480]}
-                sizes="(min-width: 860px) 420px, 90vw"
-                loading="lazy"
-              />
+              <Image src={images[j.image]} alt={altText[j.image]} loading="lazy" />
             </div>
           </div>
         ))}

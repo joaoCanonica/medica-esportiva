@@ -1,10 +1,18 @@
 ---
-import { Image } from 'astro:assets';
+import { Image, getImage } from 'astro:assets';
 import { doctor, clinic, links } from '../data/site';
 import WhatsAppIcon from './icons/WhatsAppIcon.astro';
 import InstagramIcon from './icons/InstagramIcon.astro';
 import PinIcon from './icons/PinIcon.astro';
-import consulta from '../assets/story-frames/karine-consulta-mosaico.png';
+import PlayIcon from './icons/PlayIcon.astro';
+import posterCorrida from '../assets/video-posters/corrida-preparo-prevencao.png';
+
+// Vídeo já publicado (mesmo usado em Conteúdos) em vez de imagem estática.
+const contactVideo = {
+  src: '/videos/corrida-preparo-prevencao.mp4',
+  title: 'Corrida, preparo e prevenção',
+};
+const contactPoster = await getImage({ src: posterCorrida, width: 640 });
 ---
 <section class="section contact" id="contato">
   <div class="wrap contact-layout">
@@ -37,13 +45,23 @@ import consulta from '../assets/story-frames/karine-consulta-mosaico.png';
     </div>
 
     <div class="contact-media reveal" style="--reveal-delay: 0.1s">
-      <Image
-        src={consulta}
-        alt="Dra. Karine Bittencourt em atendimento"
-        widths={[420, 640]}
-        sizes="(min-width: 900px) 40vw, 90vw"
-        loading="lazy"
-      />
+      <button
+        type="button"
+        class="watch-trigger media-video-trigger"
+        data-video-src={contactVideo.src}
+        data-video-title={contactVideo.title}
+        data-video-poster={contactPoster.src}
+        aria-label={`Assistir vídeo: ${contactVideo.title}`}
+      >
+        <Image
+          src={posterCorrida}
+          alt="Dra. Karine Bittencourt falando sobre corrida, preparo e prevenção"
+          widths={[420, 640]}
+          sizes="(min-width: 900px) 40vw, 90vw"
+          loading="lazy"
+        />
+        <span class="media-play-badge" aria-hidden="true"><PlayIcon /></span>
+      </button>
     </div>
   </div>
 </section>
