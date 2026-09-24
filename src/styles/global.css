@@ -1100,6 +1100,7 @@ button {
 }
 
 .story-step-media {
+  position: relative;
   border-radius: 2px;
   overflow: hidden;
   aspect-ratio: 4 / 5;
@@ -1125,23 +1126,36 @@ img[data-scene='conhecimento'] { object-position: 40% 35%; }
   height: 100%;
 }
 
-.story-visual-frame img {
+/* O combinador de filho direto (>) garante que a regra de posicionamento/crossfade
+   afete apenas as 4 cenas de topo (img OU o botão de vídeo da cena "médica"),
+   nunca a img aninhada dentro do botão. */
+.story-visual-frame > img,
+.story-visual-frame > button {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
   opacity: 0;
+  pointer-events: none;
   clip-path: inset(6% 6% 6% 6% round 2px);
   transform: scale(1.03);
   transition: opacity 0.7s var(--ease-editorial), clip-path 0.7s var(--ease-editorial),
     transform 0.7s var(--ease-editorial);
 }
 
-.story-visual-frame img[data-scene-active='true'] {
+.story-visual-frame > img {
+  object-fit: cover;
+}
+
+.story-visual-frame > img[data-scene-active='true'],
+.story-visual-frame > button[data-scene-active='true'] {
   opacity: 1;
   clip-path: inset(0 round 2px);
   transform: scale(1);
+}
+
+.story-visual-frame > button[data-scene-active='true'] {
+  pointer-events: auto;
 }
 
 .story-step {
@@ -1340,107 +1354,6 @@ img[data-scene='conhecimento'] { object-position: 40% 35%; }
 }
 
 /* -----------------------------------------------------------
-   Mosaico "vida em movimento"
-   ----------------------------------------------------------- */
-
-.mosaic {
-  background: var(--color-paper);
-}
-
-.mosaic-title {
-  font-size: clamp(1.7rem, 4vw, 2.6rem);
-}
-
-.mosaic-grid {
-  display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: 72%;
-  gap: 0.85rem;
-  margin-top: clamp(2rem, 5vw, 3rem);
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  padding-bottom: 0.5rem;
-  scrollbar-width: none;
-}
-
-.mosaic-grid::-webkit-scrollbar {
-  display: none;
-}
-
-.mosaic-item {
-  position: relative;
-  scroll-snap-align: start;
-  border-radius: 2px;
-  overflow: hidden;
-  aspect-ratio: 3 / 4;
-  background: var(--color-line);
-}
-
-.mosaic-item img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.mosaic-item--main img { object-position: 65% 12%; }
-.mosaic-item--palestra img { object-position: 50% 20%; }
-.mosaic-item--consulta img { object-position: 50% 8%; }
-
-/* Seminário tem banner de divulgação embutido perto da base: object-fit: contain
-   evita cortar esse texto em qualquer proporção de tela. */
-.mosaic-item--seminario img {
-  object-fit: contain;
-  background: var(--color-surface);
-}
-
-.mosaic-label {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding: 0.75rem 0.9rem;
-  background: linear-gradient(0deg, rgba(13, 38, 32, 0.82), transparent);
-  color: var(--color-paper);
-  font-size: 0.85rem;
-  font-weight: 600;
-  opacity: 0;
-  transform: translateY(6px);
-  transition: opacity 0.3s var(--ease-editorial), transform 0.3s var(--ease-editorial);
-}
-
-.mosaic-item:hover .mosaic-label,
-.mosaic-item:focus-within .mosaic-label {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-@media (hover: none) {
-  .mosaic-label {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@media (min-width: 900px) {
-  .mosaic-grid {
-    grid-auto-flow: row;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(2, 14rem);
-    overflow: visible;
-  }
-
-  .mosaic-item {
-    aspect-ratio: auto;
-    min-height: 0;
-  }
-
-  .mosaic-item--main { grid-column: span 2; grid-row: span 2; }
-  .mosaic-item--consulta { grid-column: 3 / 4; grid-row: 1 / 2; }
-  .mosaic-item--palestra { grid-column: 4 / 5; grid-row: 1 / 2; }
-  .mosaic-item--seminario { grid-column: 3 / 5; grid-row: 2 / 3; }
-}
-
-/* -----------------------------------------------------------
    Conteúdos educativos
    ----------------------------------------------------------- */
 
@@ -1603,6 +1516,59 @@ img[data-scene='conhecimento'] { object-position: 40% 35%; }
 }
 
 /* -----------------------------------------------------------
+   Gatilho de vídeo genérico — usado fora da seção Conteúdos
+   (trajetória, conhecimento, contato) para abrir o mesmo modal.
+   ----------------------------------------------------------- */
+
+.media-video-trigger {
+  display: block;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  text-align: inherit;
+}
+
+.media-video-trigger img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.media-play-badge {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: 50%;
+  background: var(--color-energy);
+  color: var(--color-forest-deep);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 24px -10px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s var(--ease-editorial);
+}
+
+.media-play-badge svg {
+  width: 1.3rem;
+  height: 1.3rem;
+  margin-left: 3px;
+}
+
+.media-video-trigger:hover .media-play-badge,
+.media-video-trigger:focus-visible .media-play-badge {
+  transform: scale(1.08);
+}
+
+/* -----------------------------------------------------------
    Autoridade e conhecimento compartilhado
    ----------------------------------------------------------- */
 
@@ -1627,6 +1593,7 @@ img[data-scene='conhecimento'] { object-position: 40% 35%; }
 }
 
 .authority-media-main {
+  position: relative;
   border-radius: 2px;
   overflow: hidden;
   aspect-ratio: 4 / 5;
@@ -1829,7 +1796,7 @@ img[data-scene='conhecimento'] { object-position: 40% 35%; }
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 45% -6%;
+  object-position: 50% 8%;
 }
 
 /* -----------------------------------------------------------

@@ -1,8 +1,10 @@
 ---
-import { Image } from 'astro:assets';
+import { Image, getImage } from 'astro:assets';
+import PlayIcon from './icons/PlayIcon.astro';
 import palestraFrame from '../assets/story-frames/karine-palestra-authority.jpg';
 import palestraArt from '../assets/images/karine-palestra.png';
 import seminario from '../assets/images/karine-seminario.png';
+import posterDor from '../assets/video-posters/dor-treino-lesao.png';
 
 const tags = [
   'Potência Empreendedora',
@@ -10,18 +12,35 @@ const tags = [
   'Saúde física e mental',
   'Autocuidado e rotina feminina',
 ];
+
+// Vídeo já publicado (mesmo usado em Conteúdos) em vez de imagem estática.
+const authorityVideo = {
+  src: '/videos/dor-treino-lesao.mp4',
+  title: 'Dor de treino ou sinal de lesão?',
+};
+const authorityPoster = await getImage({ src: posterDor, width: 640 });
 ---
 <section class="section authority">
   <div class="wrap authority-layout">
     <div class="authority-media reveal">
       <div class="authority-media-main">
-        <Image
-          src={palestraFrame}
-          alt="Dra. Karine Bittencourt palestrando sobre saúde"
-          widths={[420, 640]}
-          sizes="(min-width: 900px) 50vw, 90vw"
-          loading="lazy"
-        />
+        <button
+          type="button"
+          class="watch-trigger media-video-trigger"
+          data-video-src={authorityVideo.src}
+          data-video-title={authorityVideo.title}
+          data-video-poster={authorityPoster.src}
+          aria-label={`Assistir vídeo: ${authorityVideo.title}`}
+        >
+          <Image
+            src={palestraFrame}
+            alt="Dra. Karine Bittencourt palestrando sobre saúde"
+            widths={[420, 640]}
+            sizes="(min-width: 900px) 50vw, 90vw"
+            loading="lazy"
+          />
+          <span class="media-play-badge" aria-hidden="true"><PlayIcon /></span>
+        </button>
       </div>
       <div class="authority-media-doc">
         <Image
