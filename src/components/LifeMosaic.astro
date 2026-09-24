@@ -1,0 +1,38 @@
+---
+import { Image } from 'astro:assets';
+import corridaProva from '../assets/images/karine-corrida-prova.png';
+import danca from '../assets/images/karine-danca.png';
+import palestra from '../assets/images/karine-palestra.png';
+import seminario from '../assets/images/karine-seminario.png';
+import retrato from '../assets/images/karine-retrato-jaleco.png';
+import consulta from '../assets/story-frames/karine-consulta.png';
+
+const items = [
+  { src: corridaProva, alt: 'Dra. Karine Bittencourt correndo em uma prova', label: 'Corrida' },
+  { src: danca, alt: 'Dra. Karine Bittencourt dançando', label: 'Dança' },
+  { src: palestra, alt: 'Arte de divulgação de palestra da Dra. Karine Bittencourt', label: 'Palestras' },
+  { src: seminario, alt: 'Dra. Karine Bittencourt em um seminário de educação em saúde', label: 'Educação em saúde' },
+  { src: retrato, alt: 'Retrato profissional da Dra. Karine Bittencourt de jaleco', label: 'Consultório' },
+  { src: consulta, alt: 'Dra. Karine Bittencourt em atendimento', label: 'Vida real' },
+];
+---
+<section class="section mosaic">
+  <div class="wrap">
+    <h2 class="mosaic-title reveal">Corre. Treina. Dança. Ensina. Cuida.</h2>
+
+    <div class="mosaic-grid reveal" style="--reveal-delay: 0.1s">
+      {items.map((item) => (
+        <figure class="mosaic-item">
+          <Image
+            src={item.src}
+            alt={item.alt}
+            widths={[320, 480, 640]}
+            sizes="(min-width: 900px) 30vw, 72vw"
+            loading="lazy"
+          />
+          <figcaption class="mosaic-label">{item.label}</figcaption>
+        </figure>
+      ))}
+    </div>
+  </div>
+</section>

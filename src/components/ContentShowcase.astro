@@ -3,68 +3,73 @@ import { Image } from 'astro:assets';
 import { educationalContent, instagramTeaser, links } from '../data/site';
 import InstagramIcon from './icons/InstagramIcon.astro';
 import PlayIcon from './icons/PlayIcon.astro';
-import posterCheckup from '../assets/video-posters/checkup-cardiologico.png';
 import posterDor from '../assets/video-posters/dor-treino-lesao.png';
+import posterCheckup from '../assets/video-posters/checkup-cardiologico.png';
 import posterCorrida from '../assets/video-posters/corrida-preparo-prevencao.png';
 
 const posters: Record<string, ImageMetadata> = {
-  'checkup-cardiologico': posterCheckup,
   'dor-treino-lesao': posterDor,
+  'checkup-cardiologico': posterCheckup,
   'corrida-preparo-prevencao': posterCorrida,
 };
+
+const featured = educationalContent.find((item) => item.featured)!;
+const secondary = educationalContent.filter((item) => !item.featured);
 ---
-<section class="section section--alt" id="conteudos">
+<section class="section showcase" id="conteudos">
   <div class="wrap">
     <div class="section-head reveal">
       <span class="eyebrow">Conteúdos</span>
       <h2>Informação para cuidar melhor do seu movimento.</h2>
     </div>
 
-    <div class="content-grid reveal" style="--reveal-delay: 0.1s">
-      {educationalContent.map((item, index) => (
-        <article class="content-card">
-          <div class="content-card-media">
+    <div class="showcase-grid reveal" style="--reveal-delay: 0.1s">
+      <button
+        type="button"
+        class="showcase-card showcase-card--main watch-trigger"
+        data-video-src={featured.videoSrc}
+        data-video-title={featured.title}
+      >
+        <Image
+          src={posters[featured.slug]}
+          alt={`Imagem de capa do vídeo: ${featured.title}`}
+          widths={[420, 640]}
+          sizes="(min-width: 860px) 55vw, 92vw"
+          loading="lazy"
+        />
+        {featured.duration && <span class="showcase-duration">{featured.duration}</span>}
+        <span class="showcase-card-body">
+          <h3>{featured.title}</h3>
+          <span class="showcase-play" aria-hidden="true"><PlayIcon /></span>
+        </span>
+      </button>
+
+      <div class="showcase-secondary">
+        {secondary.map((item) => (
+          <button
+            type="button"
+            class="showcase-card showcase-card--secondary watch-trigger"
+            data-video-src={item.videoSrc}
+            data-video-title={item.title}
+          >
             <Image
               src={posters[item.slug]}
               alt={`Imagem de capa do vídeo: ${item.title}`}
-              widths={[280, 360, 480]}
-              sizes="(min-width: 780px) 360px, 90vw"
+              widths={[320, 480]}
+              sizes="(min-width: 860px) 38vw, 92vw"
               loading="lazy"
-              decoding="async"
             />
-            <span class="play-badge" aria-hidden="true"><PlayIcon /></span>
-            {item.duration && <span class="duration-badge">{item.duration}</span>}
-          </div>
-
-          <span class="index">0{index + 1}</span>
-          <h3>{item.title}</h3>
-          <p>{item.summary}</p>
-
-          <div class="content-card-links">
-            <button
-              type="button"
-              class="btn btn--ghost btn--small watch-trigger"
-              data-video-src={item.videoSrc}
-              data-video-title={item.title}
-            >
-              <PlayIcon />
-              Assistir
-            </button>
-            <a
-              class="text-link"
-              href={links.instagram}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <InstagramIcon />
-              Ver mais conteúdos no Instagram
-            </a>
-          </div>
-        </article>
-      ))}
+            {item.duration && <span class="showcase-duration">{item.duration}</span>}
+            <span class="showcase-card-body">
+              <h3>{item.title}</h3>
+              <span class="showcase-play" aria-hidden="true"><PlayIcon /></span>
+            </span>
+          </button>
+        ))}
+      </div>
     </div>
 
-    <p class="instagram-banner reveal" style="--reveal-delay: 0.15s">
+    <p class="showcase-footer reveal" style="--reveal-delay: 0.15s">
       <InstagramIcon />
       <a href={links.instagram} target="_blank" rel="noopener noreferrer">
         {instagramTeaser}

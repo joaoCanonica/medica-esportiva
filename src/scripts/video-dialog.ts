@@ -1,3 +1,4 @@
+export {};
 const dialog = document.getElementById('video-dialog') as HTMLDialogElement | null;
 const video = document.getElementById('video-dialog-player') as HTMLVideoElement | null;
 const title = document.getElementById('video-dialog-title');

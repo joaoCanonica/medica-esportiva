@@ -1,0 +1,25 @@
+---
+import { sports } from '../data/site';
+
+const energyWords = new Set(['Corrida', 'Dança']);
+---
+<div class="ticker" role="region" aria-label="Modalidades acompanhadas">
+  <div class="ticker-track">
+    <ul class="ticker-list">
+      {sports.map((sport, index) => (
+        <li class:list={['ticker-item', { 'is-energy': energyWords.has(sport) }]}>
+          {sport}
+          {index < sports.length - 1 && <span class="ticker-sep">&nbsp;—&nbsp;</span>}
+        </li>
+      ))}
+    </ul>
+    <ul class="ticker-list" aria-hidden="true">
+      {sports.map((sport, index) => (
+        <li class:list={['ticker-item', { 'is-energy': energyWords.has(sport) }]}>
+          {sport}
+          {index < sports.length - 1 && <span class="ticker-sep">&nbsp;—&nbsp;</span>}
+        </li>
+      ))}
+    </ul>
+  </div>
+</div>

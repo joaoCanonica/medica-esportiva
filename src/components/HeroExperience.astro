@@ -1,0 +1,67 @@
+---
+import { Image } from 'astro:assets';
+import corridaProva from '../assets/images/karine-corrida-prova.png';
+import portrait from '../assets/images/karine-retrato-jaleco.png';
+import { doctor, links } from '../data/site';
+import WhatsAppIcon from './icons/WhatsAppIcon.astro';
+import InstagramIcon from './icons/InstagramIcon.astro';
+---
+<section class="hero" id="inicio">
+  <div class="wrap">
+    <div class="hero-copy">
+      <span class="hero-kicker">{doctor.name}</span>
+      <h1>Medicina para uma vida em movimento.</h1>
+      <p class="lede">
+        Para quem quer começar, continuar ou evoluir no esporte com acompanhamento médico e um
+        olhar para a vida inteira.
+      </p>
+
+      <div class="hero-identity">
+        <strong>{doctor.practiceAreas}</strong>
+        <span>·</span>
+        <span>{doctor.registration}</span>
+        <span>·</span>
+        <span>Lages, {doctor.stateFull}</span>
+      </div>
+
+      <div class="cta-group">
+        <a class="btn btn--primary" href={links.whatsapp} target="_blank" rel="noopener noreferrer">
+          <WhatsAppIcon />
+          Agendar consulta
+        </a>
+        <a class="btn btn--ghost" href={links.instagram} target="_blank" rel="noopener noreferrer">
+          <InstagramIcon />
+          Conhecer no Instagram
+        </a>
+      </div>
+
+      <span class="hero-badge">Atendimento na Garden Clinic</span>
+    </div>
+
+    <div class="hero-visual" id="hero-visual">
+      <div class="hero-visual-main">
+        <Image
+          src={corridaProva}
+          alt="Dra. Karine Bittencourt correndo em uma prova de trilha"
+          widths={[420, 640, 840]}
+          sizes="(min-width: 900px) 460px, 88vw"
+          loading="eager"
+          fetchpriority="high"
+        />
+      </div>
+      <div class="hero-visual-portrait">
+        <Image
+          src={portrait}
+          alt="Retrato profissional da Dra. Karine Bittencourt de jaleco"
+          widths={[180, 260]}
+          sizes="180px"
+          loading="eager"
+        />
+      </div>
+      <span class="hero-visual-tag">{doctor.registration}</span>
+      <span class="hero-movement-word" aria-hidden="true">Movimento</span>
+    </div>
+  </div>
+</section>
+
+<script src="../scripts/hero.ts"></script>

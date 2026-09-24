@@ -1,0 +1,38 @@
+---
+import { Image } from 'astro:assets';
+import corridaProva from '../assets/images/karine-corrida-prova.png';
+import medalha from '../assets/images/karine-corrida-medalha.png';
+---
+<section class="section running-feature">
+  <div class="wrap running-layout">
+    <div class="running-media reveal-mask">
+      <div class="running-photo">
+        <Image
+          src={corridaProva}
+          alt="Dra. Karine Bittencourt correndo na Mons Ultra Trail"
+          widths={[420, 640, 800]}
+          sizes="(min-width: 900px) 50vw, 90vw"
+          loading="lazy"
+        />
+      </div>
+      <div class="running-medal" data-medal>
+        <Image
+          src={medalha}
+          alt="Medalha da Mons Ultra Trail"
+          width={200}
+          loading="lazy"
+        />
+      </div>
+    </div>
+
+    <div class="running-copy reveal">
+      <span class="editorial-number" data-parallax-slow>25K</span>
+      <span class="running-tag">Mons Ultra Trail</span>
+      <p class="running-quote editorial-quote">Nunca é só corrida.</p>
+      <p>
+        Preparo, foco, natureza e presença. Uma experiência que reúne muito do que Karine também
+        incentiva em sua prática: movimento, saúde e qualidade de vida.
+      </p>
+    </div>
+  </div>
+</section>

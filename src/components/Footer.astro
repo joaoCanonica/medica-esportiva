@@ -1,15 +1,13 @@
 ---
-import { doctor, clinic, links } from '../data/site';
+import { doctor, links } from '../data/site';
 const year = new Date().getFullYear();
 ---
 <footer class="site-footer">
   <div class="wrap">
-    <div class="footer-top">
+    <div class="footer-row">
       <div>
         <p class="footer-brand">{doctor.name}</p>
-        <p>{doctor.positioning}</p>
-        <p class="footer-reg">{doctor.registration}</p>
-        <p class="footer-reg">{clinic.city}/{clinic.state}</p>
+        <p>{doctor.positioning} · {doctor.registration}</p>
       </div>
 
       <nav class="footer-links" aria-label="Links úteis">

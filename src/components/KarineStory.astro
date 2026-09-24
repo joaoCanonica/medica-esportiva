@@ -1,0 +1,63 @@
+---
+import { Image } from 'astro:assets';
+import { storySteps } from '../data/site';
+import medica from '../assets/story-frames/karine-consulta.png';
+import atleta from '../assets/images/karine-corrida-prova.png';
+import expressao from '../assets/images/karine-danca.png';
+import conhecimento from '../assets/story-frames/karine-palestra-frame.jpg';
+
+const images: Record<string, ImageMetadata> = { medica, atleta, expressao, conhecimento };
+const altText: Record<string, string> = {
+  medica: 'Dra. Karine Bittencourt em atendimento, de jaleco',
+  atleta: 'Dra. Karine Bittencourt correndo em uma prova',
+  expressao: 'Dra. Karine Bittencourt dançando',
+  conhecimento: 'Dra. Karine Bittencourt em uma palestra sobre saúde',
+};
+---
+<section class="section story" id="trajetoria">
+  <div class="wrap">
+    <div class="story-head reveal">
+      <span class="eyebrow">Trajetória</span>
+      <h2>Quatro lados da mesma pessoa.</h2>
+    </div>
+
+    <div class="story-layout" data-story data-active-scene="medica">
+      <div class="story-visual">
+        <div class="story-visual-frame">
+          {storySteps.map((step) => (
+            <Image
+              src={images[step.image]}
+              alt={altText[step.image]}
+              widths={[420, 640]}
+              sizes="(min-width: 960px) 480px, 88vw"
+              loading="lazy"
+              data-scene={step.image}
+              data-scene-active={step.image === 'medica' ? 'true' : 'false'}
+            />
+          ))}
+        </div>
+      </div>
+
+      <div class="story-steps">
+        {storySteps.map((step) => (
+          <div class="story-step" data-story-step={step.image}>
+            <div class="story-step-media">
+              <Image
+                src={images[step.image]}
+                alt={altText[step.image]}
+                widths={[420, 640]}
+                sizes="88vw"
+                loading="lazy"
+              />
+            </div>
+            <span class="story-step-kicker">{step.kicker}</span>
+            <h3>{step.title}</h3>
+            <p>{step.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="../scripts/story.ts"></script>

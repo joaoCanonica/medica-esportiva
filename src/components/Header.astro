@@ -9,7 +9,7 @@ import WhatsAppIcon from './icons/WhatsAppIcon.astro';
     <nav class="main-nav" aria-label="Navegação principal">
       <ul>
         {nav.map((item) => (
-          <li><a href={item.href}>{item.label}</a></li>
+          <li><a href={item.href} data-nav-link={item.href.slice(1)}>{item.label}</a></li>
         ))}
       </ul>
     </nav>
@@ -62,7 +62,7 @@ import WhatsAppIcon from './icons/WhatsAppIcon.astro';
 
   <div class="mobile-menu-footer">
     <a
-      class="btn btn--primary"
+      class="btn btn--on-dark btn--primary"
       href={links.whatsapp}
       target="_blank"
       rel="noopener noreferrer"
@@ -73,68 +73,4 @@ import WhatsAppIcon from './icons/WhatsAppIcon.astro';
   </div>
 </div>
 
-<script>
-  const header = document.getElementById('site-header');
-  const openBtn = document.getElementById('menu-open-btn');
-  const closeBtn = document.getElementById('menu-close-btn');
-  const menu = document.getElementById('mobile-menu');
-  const menuLinks = menu ? Array.from(menu.querySelectorAll('a')) : [];
-  let lastFocused: HTMLElement | null = null;
-
-  const setSolidHeader = () => {
-    if (!header) return;
-    if (window.scrollY > 24) {
-      header.classList.add('is-solid');
-    } else {
-      header.classList.remove('is-solid');
-    }
-  };
-
-  setSolidHeader();
-  window.addEventListener('scroll', setSolidHeader, { passive: true });
-
-  const openMenu = () => {
-    if (!menu || !openBtn) return;
-    lastFocused = document.activeElement as HTMLElement;
-    menu.classList.add('is-open');
-    document.body.classList.add('menu-open');
-    openBtn.setAttribute('aria-expanded', 'true');
-    closeBtn?.focus();
-    document.addEventListener('keydown', onKeydown);
-  };
-
-  const closeMenu = () => {
-    if (!menu || !openBtn) return;
-    menu.classList.remove('is-open');
-    document.body.classList.remove('menu-open');
-    openBtn.setAttribute('aria-expanded', 'false');
-    document.removeEventListener('keydown', onKeydown);
-    (lastFocused ?? openBtn).focus();
-  };
-
-  const onKeydown = (event: KeyboardEvent) => {
-    if (event.key === 'Escape') {
-      closeMenu();
-      return;
-    }
-
-    if (event.key === 'Tab' && menu) {
-      const focusable = [closeBtn, ...menuLinks].filter(Boolean) as HTMLElement[];
-      if (focusable.length === 0) return;
-      const first = focusable[0];
-      const last = focusable[focusable.length - 1];
-
-      if (event.shiftKey && document.activeElement === first) {
-        event.preventDefault();
-        last.focus();
-      } else if (!event.shiftKey && document.activeElement === last) {
-        event.preventDefault();
-        first.focus();
-      }
-    }
-  };
-
-  openBtn?.addEventListener('click', openMenu);
-  closeBtn?.addEventListener('click', closeMenu);
-  menuLinks.forEach((link) => link.addEventListener('click', closeMenu));
-</script>
+<script src="../scripts/header-nav.ts"></script>

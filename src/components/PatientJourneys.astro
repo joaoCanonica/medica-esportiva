@@ -1,0 +1,71 @@
+---
+import { Image } from 'astro:assets';
+import { journeys } from '../data/site';
+import consulta from '../assets/story-frames/karine-consulta.png';
+import medalha from '../assets/images/karine-corrida-medalha.png';
+import dor from '../assets/video-posters/dor-treino-lesao.png';
+import corrida from '../assets/images/karine-corrida-prova.png';
+
+const images: Record<string, ImageMetadata> = { consulta, medalha, dor, corrida };
+const altText: Record<string, string> = {
+  consulta: 'Dra. Karine Bittencourt em atendimento',
+  medalha: 'Medalha de participação em prova de corrida',
+  dor: 'Dra. Karine Bittencourt falando sobre dor de treino',
+  corrida: 'Dra. Karine Bittencourt correndo em uma prova',
+};
+---
+<section class="section journeys">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Para você</span>
+      <h2>Qual é o seu momento agora?</h2>
+    </div>
+
+    <div class="journey-grid" id="journey-app">
+      <div class="journey-tabs" role="tablist" aria-label="Escolha seu momento">
+        {journeys.map((j, i) => (
+          <button
+            type="button"
+            role="tab"
+            class="journey-tab"
+            id={`tab-${j.id}`}
+            aria-selected={i === 0 ? 'true' : 'false'}
+            aria-controls={`panel-${j.id}`}
+            tabindex={i === 0 ? 0 : -1}
+            data-journey-tab
+          >
+            {j.tab}
+          </button>
+        ))}
+      </div>
+
+      <div class="journey-panels">
+        {journeys.map((j) => (
+          <div
+            class="journey-panel"
+            id={`panel-${j.id}`}
+            role="tabpanel"
+            aria-labelledby={`tab-${j.id}`}
+            data-journey-panel
+          >
+            <div class="journey-panel-text">
+              <h3>{j.title}</h3>
+              <p>{j.text}</p>
+            </div>
+            <div class="journey-panel-media">
+              <Image
+                src={images[j.image]}
+                alt={altText[j.image]}
+                widths={[360, 480]}
+                sizes="(min-width: 860px) 420px, 90vw"
+                loading="lazy"
+              />
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="../scripts/journeys.ts"></script>

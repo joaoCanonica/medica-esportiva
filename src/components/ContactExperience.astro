@@ -1,0 +1,49 @@
+---
+import { Image } from 'astro:assets';
+import { doctor, clinic, links } from '../data/site';
+import WhatsAppIcon from './icons/WhatsAppIcon.astro';
+import InstagramIcon from './icons/InstagramIcon.astro';
+import PinIcon from './icons/PinIcon.astro';
+import consulta from '../assets/story-frames/karine-consulta.png';
+---
+<section class="section contact" id="contato">
+  <div class="wrap contact-layout">
+    <div class="contact-copy reveal">
+      <span class="eyebrow">Contato</span>
+      <h2>Seu movimento merece cuidado, contexto e direção.</h2>
+      <p>Entre em contato para conhecer o atendimento da Dra. Karine Bittencourt em Lages.</p>
+
+      <div class="cta-group">
+        <a class="btn btn--on-dark btn--primary" href={links.whatsapp} target="_blank" rel="noopener noreferrer">
+          <WhatsAppIcon />
+          Agendar pelo WhatsApp
+        </a>
+        <a class="btn btn--on-dark" href={links.instagram} target="_blank" rel="noopener noreferrer">
+          <InstagramIcon />
+          Acompanhar no Instagram
+        </a>
+        <a class="btn btn--on-dark" href={links.googleMaps} target="_blank" rel="noopener noreferrer">
+          <PinIcon />
+          Abrir rota
+        </a>
+      </div>
+
+      <div class="contact-details">
+        <strong>{clinic.name}</strong>
+        <span>{clinic.street} - {clinic.neighborhood}</span>
+        <span>{clinic.city} - {clinic.state}, CEP {clinic.postalCode}</span>
+        <span>{doctor.registration}</span>
+      </div>
+    </div>
+
+    <div class="contact-media reveal" style="--reveal-delay: 0.1s">
+      <Image
+        src={consulta}
+        alt="Dra. Karine Bittencourt em atendimento"
+        widths={[420, 640]}
+        sizes="(min-width: 900px) 40vw, 90vw"
+        loading="lazy"
+      />
+    </div>
+  </div>
+</section>
