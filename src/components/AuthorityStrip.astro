@@ -4,7 +4,6 @@ import PlayIcon from './icons/PlayIcon.astro';
 import palestraFrame from '../assets/story-frames/karine-palestra-authority.jpg';
 import palestraArt from '../assets/images/karine-palestra.png';
 import seminario from '../assets/images/karine-seminario.png';
-import posterDor from '../assets/video-posters/dor-treino-lesao.png';
 
 const tags = [
   'Potência Empreendedora',
@@ -13,12 +12,13 @@ const tags = [
   'Autocuidado e rotina feminina',
 ];
 
-// Vídeo já publicado (mesmo usado em Conteúdos) em vez de imagem estática.
+// Vídeo real da palestra (mesmo conteúdo do qual a capa foi extraída),
+// otimizado para web com o mesmo padrão dos vídeos de Conteúdos.
 const authorityVideo = {
-  src: '/videos/dor-treino-lesao.mp4',
-  title: 'Dor de treino ou sinal de lesão?',
+  src: '/videos/como-foi-palestra.mp4',
+  title: 'Como foi a palestra',
 };
-const authorityPoster = await getImage({ src: posterDor, width: 640 });
+const authorityPoster = await getImage({ src: palestraFrame, width: 640 });
 ---
 <section class="section authority">
   <div class="wrap authority-layout">
