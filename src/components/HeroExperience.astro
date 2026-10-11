@@ -17,11 +17,11 @@ import InstagramIcon from './icons/InstagramIcon.astro';
       </p>
 
       <div class="hero-identity">
-        <strong>{doctor.practiceAreas}</strong>
-        <span>·</span>
-        <span>{doctor.registration}</span>
-        <span>·</span>
-        <span>Lages, {doctor.stateFull}</span>
+        <ul>
+          <li><strong>{doctor.practiceAreas}</strong></li>
+          <li>{doctor.registration}</li>
+          <li>{doctor.city}, {doctor.stateFull}</li>
+        </ul>
       </div>
 
       <div class="cta-group">
@@ -58,8 +58,6 @@ import InstagramIcon from './icons/InstagramIcon.astro';
           loading="eager"
         />
       </div>
-      <span class="hero-visual-tag">{doctor.registration}</span>
-      <span class="hero-movement-word" aria-hidden="true">Movimento</span>
     </div>
   </div>
 </section>
