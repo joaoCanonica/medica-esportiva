@@ -4,7 +4,7 @@ const crm = '16812';
 const rqe = '11326';
 
 export const doctor = {
-  name: 'Dra. Karine Bittencourt',
+  name: 'Dra. Karine Bitencourt',
   positioning: 'Medicina e estilo de vida',
   practiceAreas: 'Medicina de Família e Esportiva',
   crm,
@@ -229,9 +229,9 @@ export const faqItems = [
 ];
 
 export const seo = {
-  title: 'Dra. Karine Bittencourt | Medicina Esportiva em Lages',
+  title: 'Dra. Karine Bitencourt | Medicina Esportiva em Lages',
   description:
-    'Dra. Karine Bittencourt em Lages/SC: medicina, estilo de vida e acompanhamento para quem pratica esporte ou quer começar a se movimentar com segurança.',
+    'Dra. Karine Bitencourt em Lages/SC: medicina, estilo de vida e acompanhamento para quem pratica esporte ou quer começar a se movimentar com segurança.',
   ogImageAlt:
 `Cartão em fundo verde escuro com o nome ${doctor.name}, ${doctor.registration} e ${doctor.city}, ${doctor.stateFull}`,
   themeColor: '#173c32',

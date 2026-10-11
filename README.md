@@ -1,4 +1,4 @@
-# Site — Dra. Karine Bittencourt
+# Site — Dra. Karine Bitencourt
 
 Site institucional estático, construído com [Astro](https://astro.build) + TypeScript, sem
 backend, sem CMS e com o mínimo de JavaScript necessário.
