@@ -1,6 +1,7 @@
 ---
 import { Image, getImage } from 'astro:assets';
 import PlayIcon from './icons/PlayIcon.astro';
+import { talkVideo } from '../data/site';
 import palestraFrame from '../assets/story-frames/karine-palestra-authority.jpg';
 import palestraArt from '../assets/images/karine-palestra.png';
 import seminario from '../assets/images/karine-seminario.png';
@@ -14,10 +15,7 @@ const tags = [
 
 // Vídeo real da palestra (mesmo conteúdo do qual a capa foi extraída),
 // otimizado para web com o mesmo padrão dos vídeos de Conteúdos.
-const authorityVideo = {
-  src: '/videos/como-foi-palestra.mp4',
-  title: 'Como foi a palestra',
-};
+const authorityVideo = { src: talkVideo.videoSrc, title: talkVideo.title };
 const authorityPoster = await getImage({ src: palestraFrame, width: 640 });
 ---
 <section class="section authority">
@@ -56,8 +54,7 @@ const authorityPoster = await getImage({ src: palestraFrame, width: 640 });
       <span class="eyebrow">Conhecimento compartilhado</span>
       <h2>Conhecimento que circula.</h2>
       <p>
-        Palestras, conversas e ações de educação em saúde aproximam informação médica da rotina
-        de diferentes públicos.
+        {talkVideo.summary}
       </p>
 
       <div class="authority-secondary">

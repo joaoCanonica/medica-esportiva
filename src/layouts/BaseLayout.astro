@@ -2,49 +2,62 @@
 import '@fontsource-variable/newsreader/wght.css';
 import '@fontsource-variable/ibm-plex-sans/wght.css';
 import '../styles/global.css';
-import { doctor, clinic, links, seo } from '../data/site';
+import { getImage } from 'astro:assets';
+import { doctor, seo } from '../data/site';
+import { buildSchema, videoSources } from '../lib/schema';
+import portrait from '../assets/images/karine-retrato-jaleco.png';
+import posterDor from '../assets/video-posters/dor-treino-lesao.png';
+import posterCheckup from '../assets/video-posters/checkup-cardiologico.png';
+import posterCorrida from '../assets/video-posters/corrida-preparo-prevencao.png';
+import posterPalestra from '../assets/story-frames/karine-palestra-authority.jpg';
 
 interface Props {
   title?: string;
   description?: string;
   path?: string;
+  /** Inclui no JSON-LD os dados completos (médica, clínica, vídeos e FAQ). Só na home. */
+  fullSchema?: boolean;
 }
 
 const {
   title = seo.title,
   description = seo.description,
   path = '/',
+  fullSchema: full = false,
 } = Astro.props;
 
 const canonicalURL = new URL(path, Astro.site);
 const ogImageURL = new URL('/og-image.png', Astro.site);
 
-const structuredData = {
-  '@context': 'https://schema.org',
-  '@type': 'Physician',
-  name: doctor.name,
-  medicalSpecialty: doctor.practiceAreas,
-  description: seo.description,
-  telephone: '+55 49 99924-7102',
-  url: canonicalURL.toString(),
-  address: {
-    '@type': 'PostalAddress',
-    streetAddress: `${clinic.street} - ${clinic.neighborhood}`,
-    addressLocality: clinic.city,
-    addressRegion: clinic.state,
-    postalCode: clinic.postalCode,
-    addressCountry: 'BR',
-  },
-  areaServed: {
-    '@type': 'City',
-    name: `${clinic.city}, ${clinic.state}`,
-  },
-  identifier: [
-    { '@type': 'PropertyValue', name: 'CRM/SC', value: '16812' },
-    { '@type': 'PropertyValue', name: 'RQE', value: '11326' },
-  ],
-  sameAs: [links.instagram],
+// Posters já otimizados pelo astro:assets (mesma largura usada nos componentes,
+// então o arquivo é reaproveitado e não duplicado).
+const posterFiles: Record<string, ImageMetadata> = {
+  'dor-treino-lesao': posterDor,
+  'checkup-cardiologico': posterCheckup,
+  'corrida-preparo-prevencao': posterCorrida,
+  'como-foi-palestra': posterPalestra,
 };
+
+const videos = full
+  ? await Promise.all(
+      videoSources.map(async (v) => ({
+        ...v,
+        poster: (await getImage({ src: posterFiles[v.slug], width: 640 })).src,
+      }))
+    )
+  : [];
+const physicianImage = full ? (await getImage({ src: portrait, width: 260 })).src : undefined;
+
+const structuredData = buildSchema({
+  site: Astro.site!,
+  canonical: canonicalURL,
+  title,
+  description,
+  ogImage: ogImageURL,
+  full,
+  physicianImage,
+  videos,
+});
 ---
 
 <!doctype html>
