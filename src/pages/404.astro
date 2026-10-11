@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { doctor, links } from '../data/site';
+import WhatsAppIcon from '../components/icons/WhatsAppIcon.astro';
+---
+<BaseLayout
+  title={`Página não encontrada | ${doctor.name}`}
+  description="O endereço acessado não existe neste site."
+  path="/404/"
+  noindex
+>
+  <Header />
+  <main id="main">
+    <section class="section">
+      <div class="wrap" style="max-width: 46rem;">
+        <h1>Página não encontrada</h1>
+        <p class="lede" style="margin-top: 1rem;">O endereço acessado não existe ou mudou de lugar.</p>
+        <div class="cta-group" style="margin-top: 2rem;">
+          <a class="btn btn--primary" href="/">Voltar para o início</a>
+          <a class="btn btn--ghost" href={links.whatsapp} target="_blank" rel="noopener noreferrer">
+            <WhatsAppIcon />
+            Falar pelo WhatsApp
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>

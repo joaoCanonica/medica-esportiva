@@ -285,6 +285,12 @@ button {
   color: var(--color-ink-soft);
 }
 
+.text-block h2 {
+  font-size: 1.35rem;
+  margin-top: 2.25rem;
+  margin-bottom: 0.75rem;
+}
+
 .text-block p + p {
   margin-top: 1.1rem;
 }
