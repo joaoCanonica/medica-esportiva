@@ -1428,6 +1428,14 @@ img[data-scene='conhecimento'] { object-position: 40% 35%; }
   font-size: 1.05rem;
 }
 
+.showcase-summary {
+  display: block;
+  margin-top: 0.4rem;
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: rgba(247, 246, 241, 0.86);
+}
+
 .showcase-card--main .showcase-card-body h3 {
   font-size: clamp(1.3rem, 2.6vw, 1.7rem);
 }

@@ -48,7 +48,10 @@ const ordered = [...educationalContent].sort((a, b) => Number(b.featured) - Numb
           />
           {item.duration && <span class="showcase-duration">{item.duration}</span>}
           <span class="showcase-card-body">
-            <h3>{item.title}</h3>
+            <span class="showcase-card-text">
+              <h3>{item.title}</h3>
+              <span class="showcase-summary">{item.summary}</span>
+            </span>
             <span class="showcase-play" aria-hidden="true"><PlayIcon /></span>
           </span>
         </button>

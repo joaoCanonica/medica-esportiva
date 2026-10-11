@@ -208,6 +208,24 @@ export const faqItems = [
     question: 'Como obtenho informações sobre consulta?',
     answer: 'Entre em contato pelo WhatsApp para consultar disponibilidade e formato de atendimento.',
   },
+  {
+    question: `Onde a ${doctor.name} atende?`,
+    answer: `Na ${clinic.name}, ${clinic.street}, bairro ${clinic.neighborhood}, ${clinic.city}/${clinic.state}.`,
+  },
+  {
+    question: 'Como agendar uma consulta?',
+    answer: 'Pelo WhatsApp, usando o botão "Agendar consulta" do site.',
+  },
+  {
+    question: 'Preciso praticar esporte para ser atendido?',
+    answer:
+      'Não. O atendimento também é para quem quer sair do sedentarismo, retomar uma atividade ou encontrar um ponto de partida mais seguro.',
+  },
+  {
+    question: 'O que é medicina esportiva?',
+    answer:
+      'É a área da medicina que cuida da saúde de quem pratica ou quer começar a praticar atividade física. Envolve avaliação clínica, prevenção e orientação sobre exercício, lesões e retorno à atividade.',
+  },
 ];
 
 export const seo = {
