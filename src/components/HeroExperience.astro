@@ -17,11 +17,11 @@ import InstagramIcon from './icons/InstagramIcon.astro';
       </p>
 
       <div class="hero-identity">
-        <strong>{doctor.practiceAreas}</strong>
-        <span>·</span>
-        <span>{doctor.registration}</span>
-        <span>·</span>
-        <span>Lages, {doctor.stateFull}</span>
+        <ul>
+          <li><strong>{doctor.practiceAreas}</strong></li>
+          <li>{doctor.registration}</li>
+          <li>{doctor.city}, {doctor.stateFull}</li>
+        </ul>
       </div>
 
       <div class="cta-group">
@@ -42,7 +42,7 @@ import InstagramIcon from './icons/InstagramIcon.astro';
       <div class="hero-visual-main">
         <Image
           src={corridaProva}
-          alt="Dra. Karine Bittencourt correndo em uma prova de trilha"
+          alt="Dra. Karine Bitencourt correndo em uma prova de trilha"
           widths={[420, 640, 840]}
           sizes="(min-width: 900px) 460px, 88vw"
           loading="eager"
@@ -52,14 +52,12 @@ import InstagramIcon from './icons/InstagramIcon.astro';
       <div class="hero-visual-portrait">
         <Image
           src={portrait}
-          alt="Retrato profissional da Dra. Karine Bittencourt de jaleco"
+          alt="Retrato profissional da Dra. Karine Bitencourt de jaleco"
           widths={[180, 260]}
           sizes="180px"
           loading="eager"
         />
       </div>
-      <span class="hero-visual-tag">{doctor.registration}</span>
-      <span class="hero-movement-word" aria-hidden="true">Movimento</span>
     </div>
   </div>
 </section>

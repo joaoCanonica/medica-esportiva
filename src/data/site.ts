@@ -1,10 +1,15 @@
 // Dados centrais do site. Apenas informações confirmadas pela cliente.
 
+const crm = '16812';
+const rqe = '11326';
+
 export const doctor = {
-  name: 'Dra. Karine Bittencourt',
+  name: 'Dra. Karine Bitencourt',
   positioning: 'Medicina e estilo de vida',
   practiceAreas: 'Medicina de Família e Esportiva',
-  registration: 'CRM/SC 16812 | RQE 11326',
+  crm,
+  rqe,
+  registration: `CRM/SC ${crm} | RQE ${rqe}`,
   city: 'Lages',
   state: 'SC',
   stateFull: 'Santa Catarina',
@@ -22,6 +27,9 @@ export const clinic = {
 export const fullAddress = `${clinic.name}, ${clinic.street} - ${clinic.neighborhood}, ${clinic.city} - ${clinic.state}, CEP ${clinic.postalCode}`;
 
 const whatsappNumber = '5549999247102';
+
+// Telefone em formato E.164, derivado do número do WhatsApp (uso em dados estruturados).
+export const phoneE164 = `+${whatsappNumber}`;
 const whatsappMessage =
   'Olá, Dra. Karine! Conheci seu trabalho pelo site e gostaria de receber informações sobre o atendimento.';
 
@@ -88,32 +96,32 @@ export const journeys = [
   },
 ];
 
-// Narrativa sticky — quatro momentos
+// Narrativa sticky: quatro momentos
 export const storySteps = [
   {
     id: 'medica',
-    kicker: '01 — Médica',
+    kicker: 'Médica',
     title: 'Medicina e estilo de vida.',
     text: 'Um olhar que considera a pessoa, sua rotina e sua relação com o movimento.',
     image: 'medica',
   },
   {
     id: 'atleta',
-    kicker: '02 — Atleta',
+    kicker: 'Atleta',
     title: 'Ela também conhece o outro lado do movimento.',
-    text: 'Karine corre, treina e participa de provas — sem transformar a própria experiência em promessa para o paciente.',
+    text: 'Karine corre, treina e participa de provas, sem transformar a própria experiência em promessa para o paciente.',
     image: 'atleta',
   },
   {
     id: 'expressao',
-    kicker: '03 — Expressão',
+    kicker: 'Expressão',
     title: 'Movimento também é expressão.',
     text: 'Na dança, na força e na corrida, diferentes formas de estar presente no próprio corpo.',
     image: 'expressao',
   },
   {
     id: 'conhecimento',
-    kicker: '04 — Conhecimento',
+    kicker: 'Conhecimento',
     title: 'Informação também é cuidado.',
     text: 'Palestras, conversas e educação em saúde aproximam conhecimento médico da vida cotidiana.',
     image: 'conhecimento',
@@ -128,15 +136,19 @@ export const educationalContent = [
       'Intensidade, duração, limitação e evolução da dor ajudam a indicar quando vale procurar avaliação.',
     videoSrc: '/videos/dor-treino-lesao.mp4',
     duration: '0:56',
+    durationISO: 'PT56S',
+    uploadDate: '2026-09-24T16:29:20+00:00',
     featured: true,
   },
   {
     slug: 'checkup-cardiologico',
     title: 'Antes da performance, vem a segurança',
     summary:
-      'Ser atleta não significa estar livre de problemas cardíacos — a avaliação individual ajuda a entender o esforço seguro.',
+      'Ser atleta não significa estar livre de problemas cardíacos. A avaliação individual ajuda a entender o esforço seguro.',
     videoSrc: '/videos/checkup-cardiologico.mp4',
     duration: '0:45',
+    durationISO: 'PT45S',
+    uploadDate: '2026-09-24T16:29:20+00:00',
     featured: false,
   },
   {
@@ -146,8 +158,32 @@ export const educationalContent = [
       'Sobrecarga, técnica e preparo muscular influenciam a experiência de quem corre.',
     videoSrc: '/videos/corrida-preparo-prevencao.mp4',
     duration: '1:24',
+    durationISO: 'PT1M24S',
+    uploadDate: '2026-09-24T16:29:20+00:00',
     featured: false,
   },
+];
+
+// Vídeo da palestra (seção de conhecimento compartilhado).
+// uploadDate: data do commit que adicionou o arquivo; durações medidas com ffprobe.
+export const talkVideo = {
+  slug: 'como-foi-palestra',
+  title: 'Como foi a palestra',
+  summary:
+    'Palestras, conversas e ações de educação em saúde aproximam informação médica da rotina de diferentes públicos.',
+  videoSrc: '/videos/como-foi-palestra.mp4',
+  durationISO: 'PT1M11S',
+  uploadDate: '2026-09-25T02:41:44+00:00',
+};
+
+// Temas tratados no site (dados estruturados: knowsAbout).
+export const topics = [
+  'Medicina esportiva',
+  'Medicina de estilo de vida',
+  'Dor e lesão no treino',
+  'Avaliação cardiológica do esportista',
+  'Corrida e preparo para provas',
+  'Retorno à atividade física',
 ];
 
 export const instagramTeaser = 'Mais informação, rotina e bastidores no Instagram.';
@@ -172,10 +208,31 @@ export const faqItems = [
     question: 'Como obtenho informações sobre consulta?',
     answer: 'Entre em contato pelo WhatsApp para consultar disponibilidade e formato de atendimento.',
   },
+  {
+    question: `Onde a ${doctor.name} atende?`,
+    answer: `Na ${clinic.name}, ${clinic.street}, bairro ${clinic.neighborhood}, ${clinic.city}/${clinic.state}.`,
+  },
+  {
+    question: 'Como agendar uma consulta?',
+    answer: 'Pelo WhatsApp, usando o botão "Agendar consulta" do site.',
+  },
+  {
+    question: 'Preciso praticar esporte para ser atendido?',
+    answer:
+      'Não. O atendimento também é para quem quer sair do sedentarismo, retomar uma atividade ou encontrar um ponto de partida mais seguro.',
+  },
+  {
+    question: 'O que é medicina esportiva?',
+    answer:
+      'É a área da medicina que cuida da saúde de quem pratica ou quer começar a praticar atividade física. Envolve avaliação clínica, prevenção e orientação sobre exercício, lesões e retorno à atividade.',
+  },
 ];
 
 export const seo = {
-  title: 'Dra. Karine Bittencourt | Medicina Esportiva em Lages',
+  title: 'Dra. Karine Bitencourt | Medicina Esportiva em Lages',
   description:
-    'Conheça o trabalho da Dra. Karine Bittencourt em Lages/SC. Medicina, estilo de vida e acompanhamento para quem pratica esporte ou deseja começar a se movimentar com segurança.',
+    'Dra. Karine Bitencourt em Lages/SC: medicina, estilo de vida e acompanhamento para quem pratica esporte ou quer começar a se movimentar com segurança.',
+  ogImageAlt:
+`Cartão em fundo verde escuro com o nome ${doctor.name}, ${doctor.registration} e ${doctor.city}, ${doctor.stateFull}`,
+  themeColor: '#173c32',
 };
