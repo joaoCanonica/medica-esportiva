@@ -213,5 +213,8 @@ export const faqItems = [
 export const seo = {
   title: 'Dra. Karine Bittencourt | Medicina Esportiva em Lages',
   description:
-    'Conheça o trabalho da Dra. Karine Bittencourt em Lages/SC. Medicina, estilo de vida e acompanhamento para quem pratica esporte ou deseja começar a se movimentar com segurança.',
+    'Dra. Karine Bittencourt em Lages/SC: medicina, estilo de vida e acompanhamento para quem pratica esporte ou quer começar a se movimentar com segurança.',
+  ogImageAlt:
+`Cartão em fundo verde escuro com o nome ${doctor.name}, ${doctor.registration} e ${doctor.city}, ${doctor.stateFull}`,
+  themeColor: '#173c32',
 };
