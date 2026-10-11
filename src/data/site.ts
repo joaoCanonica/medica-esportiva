@@ -96,32 +96,32 @@ export const journeys = [
   },
 ];
 
-// Narrativa sticky — quatro momentos
+// Narrativa sticky: quatro momentos
 export const storySteps = [
   {
     id: 'medica',
-    kicker: '01 — Médica',
+    kicker: 'Médica',
     title: 'Medicina e estilo de vida.',
     text: 'Um olhar que considera a pessoa, sua rotina e sua relação com o movimento.',
     image: 'medica',
   },
   {
     id: 'atleta',
-    kicker: '02 — Atleta',
+    kicker: 'Atleta',
     title: 'Ela também conhece o outro lado do movimento.',
-    text: 'Karine corre, treina e participa de provas — sem transformar a própria experiência em promessa para o paciente.',
+    text: 'Karine corre, treina e participa de provas, sem transformar a própria experiência em promessa para o paciente.',
     image: 'atleta',
   },
   {
     id: 'expressao',
-    kicker: '03 — Expressão',
+    kicker: 'Expressão',
     title: 'Movimento também é expressão.',
     text: 'Na dança, na força e na corrida, diferentes formas de estar presente no próprio corpo.',
     image: 'expressao',
   },
   {
     id: 'conhecimento',
-    kicker: '04 — Conhecimento',
+    kicker: 'Conhecimento',
     title: 'Informação também é cuidado.',
     text: 'Palestras, conversas e educação em saúde aproximam conhecimento médico da vida cotidiana.',
     image: 'conhecimento',
@@ -144,7 +144,7 @@ export const educationalContent = [
     slug: 'checkup-cardiologico',
     title: 'Antes da performance, vem a segurança',
     summary:
-      'Ser atleta não significa estar livre de problemas cardíacos — a avaliação individual ajuda a entender o esforço seguro.',
+      'Ser atleta não significa estar livre de problemas cardíacos. A avaliação individual ajuda a entender o esforço seguro.',
     videoSrc: '/videos/checkup-cardiologico.mp4',
     duration: '0:45',
     durationISO: 'PT45S',

@@ -853,8 +853,15 @@ button {
   font-weight: 700;
 }
 
-.ticker-sep {
-  color: rgba(247, 246, 241, 0.35);
+/* Separador visual só em CSS: o texto lido fica limpo. */
+.ticker-item:not(:last-child)::after {
+  content: '';
+  display: inline-block;
+  width: 0.9em;
+  height: 1px;
+  margin-left: 2.1rem;
+  vertical-align: middle;
+  background: rgba(247, 246, 241, 0.35);
 }
 
 @keyframes ticker-scroll {
